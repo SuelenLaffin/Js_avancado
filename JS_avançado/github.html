@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Repositórios</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+        </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"
+        rel="stylesheet">
+</head>
+
+<body>
+    <h2 class="text-center">Repositórios GitHub</h2>
+    <hr>
+
+    <div class="form-control">
+        <label for="usuario">Usuário:</label>
+        <div class="row">
+            <div class="col-3">
+                <input class="form-control" type="text" id="usuario" placeholder="Informe um usuário do GitHub"
+                    name="usuario">
+
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary" id="repositorios">Buscar repositório</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-control" style="overflow-y: scroll; height: 300px;">
+        <p>Resultados das buscas:</p>
+        <hr>
+        <table class="table table-striped table-bordered table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Link</th>
+                    <th>Criado em</th>
+                    <th>Atualizado em</th>
+
+                </tr>
+
+            </thead>
+            <tbody id="resultado">
+
+            </tbody>
+        </table>
+
+    </div>
+    <br>
+    <a href="index.html">Início</a>
+    <script>
+        $("#repositorios").click( // evento de click para este id
+
+
+            function () { //var nome = $("#usuario").val(); // criação de uma váriavel, onde a pessoa digita o nome do usuário, uma forma de usar
+
+                $.ajax(
+                    {
+                        url: "https://api.github.com/users/" + $("#usuario").val() + "/repos", // url usada para buscar os usuários
+                        //var não é necessário, podemos inserir direto o jquery, pois não vai ser usado de novo
+                        type: "get",
+                        success: function (repositorios) {
+
+                            repositorios.forEach(repositorio => {
+                                escreve_linha(repositorio);
+
+                            });
+
+                        },
+                        error: function () {
+                            console.log(erro);
+
+
+                        }
+
+
+                    }
+                );
+
+            }
+        );
+
+        function escreve_linha(repositorio) {
+            let linha = tag("tr");
+            $("<td>",{text:repositorio.id}).appendTo(linha);
+            $("<td>",{text:repositorio.name}).appendTo(linha);
+            $("<td>",{text:repositorio.html_url}).appendTo(linha);
+            $("<td>",{text:repositorio.created_at}).appendTo(linha);
+            $("<td>",{text:repositorio.updated_at}).appendTo(linha);
+            $("#resultado").append(linha);
+        }
+
+        function tag(nome) {
+            return $("<" + nome +"></"+nome+">");
+        }
+    </script>
+</body>
+
+</html>

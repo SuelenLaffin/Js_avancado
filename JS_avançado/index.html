@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de CEP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+        </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"
+        rel="stylesheet">
+</head>
+
+<body class="container">
+
+
+    <h2 class="text-center">Busca de CEP</h2>
+    <hr>
+   
+    <div class="form-control">
+        <label for="cep">CEP:</label>
+        <div class="row">
+            <div class="col-3">
+                <input class="form-control" type="number" id="cep" placeholder="Informe um CEP válido" name="cep">
+
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary" id="buscar">Buscar endereço</button>
+            </div>
+
+        </div>
+
+        <hr>
+    </div>
+    <br>
+
+
+    <div class="form-control" id="resultado" style="overflow-y: scroll;">
+        <p>Resultados das buscas:</p>
+        <hr>
+
+    </div>
+    <a href="github.html">Busca por repositórios GitHub</a>
+    <script src="js/cep.js"></script>
+
+</body>
+
+</html>
