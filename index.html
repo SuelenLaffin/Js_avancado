@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EI PI AI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script> src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity = "sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin = "anonymous"
+    </script>
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"  
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"   
+    crossorigin="anonymous"   
+    rel="stylesheet" 
+    >
+
+</head>
+
+<body>
+    <button id="lista">Lista de Pessoas</button>
+    <input type="text" placeholder="Informe o nome da pessoa" id="nome">
+    <button class="enviar">Add</button>
+
+    <script>
+        
+$("#lista").click(
+
+    function(){
+        $.ajax(
+            {
+                url:"http://localhost:4000/teste",
+                type:"get",
+                success: function(res){
+                    console.log(res);
+
+                },
+                error:function(erro){
+                    console.warn(erro);
+
+                }
+
+            }
+        );
+
+    }
+
+);
+
+$(".enviar").click(
+    ()=>{
+        let parametro = {
+            nome: $("#nome").val()
+        }
+        $.ajax(
+            {
+                url:"http://localhost:4000/add_pessoa",
+                type:"post",
+                headers:{
+                    "Accept":"application/json",
+                    "Content-Type":"application/json"
+
+                },
+                data:JSON.stringify(parametro),
+                success:(res)=>{
+                    console.log(res);
+
+                },
+                error: (erro)=>{
+                    console.warn(erro);
+
+                }
+            }
+        );
+    }
+);
+
+/*$(".enviar").click(
+    function(){
+        $.ajax(
+            {
+                url:"",
+                type:"",
+                headers:"",
+            }
+        );
+    }
+);
+*/
+
+
+
+
+    
+    </script>
+
+   
+
+</body>
+
+</html>
